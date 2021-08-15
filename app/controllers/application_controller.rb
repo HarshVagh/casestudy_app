@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, if: :devise_controller?
 
+    #check_authorization
+
+    # rescue_from CanCan::AccessDenied do |exception|
+    #     redirect_to root_path, :alert => exception.message
+    # end
+
     protected
 
         def configure_permitted_parameters
@@ -11,13 +17,12 @@ class ApplicationController < ActionController::Base
         end
 
         def after_sign_in_path_for(resource)
-            case resource.roles.first.name
-            when "candidate"
-                candidate_dashboard_path
-            when "assessor"
-                assessor_dashboard_path
-            when "admin"
+            if resource.roles.exists?(name: "admin")
                 admin_dashboard_path
+            elsif resource.roles.exists?(name: "assessor")
+                assessor_dashboard_path
+            elsif resource.roles.exists?(name: "candidate")
+                candidate_dashboard_path
             else
                 root_path
             end

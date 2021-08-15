@@ -23,19 +23,10 @@ class User < ApplicationRecord
 
   after_create :add_new_role
 
-    # after_find do |user|
-    #   role = user.roles.find_by(name: params[:user][:roles])
-    #   if role == nil
-    #     errors.add(:user_id, "Invalid role")
-    #   end
-    # end
-
-    private
-      def add_new_role
-          role_user = RoleUser.new(role_id: Role.find_by(name: "user").id, user_id: self. id)
-          role_user.save
-      end
-
-      
+  private
+    def add_new_role
+        role_user = RoleUser.new(role_id: Role.find_by(name: "candidate").id, user_id: self.id)
+        role_user.save
+    end
 
 end

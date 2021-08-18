@@ -8,8 +8,8 @@ class Ability
     return unless user.present?
 
     can :admin_dashboard, :dashboard if user.roles.exists?(name: "admin")
-    can :candidate_dashboard, :dashboard if user.roles.exists?(name: "assessor")
-    can :assessor_dashboard, :dashboard if user.roles.exists?(name: "candidate")
+    can :assessor_dashboard, :dashboard if user.roles.exists?(name: "assessor")
+    can :candidate_dashboard, :dashboard if user.roles.exists?(name: "candidate")
     
     #user ||= User.new # guest user (not logged in)
     # if user.roles.first? :admin

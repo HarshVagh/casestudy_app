@@ -1,0 +1,13 @@
+<%= form_with model: question, url: { action: :create } do |f| %>
+    <br>
+    <div class="form-floating mb-3">
+    <%= f.text_area :body, class:"form-control", id:"floatingInput", style:"height: 200px", placeholder:"Enter Question body" %>
+    <%= f.label "Enter Question body", for:"floatingInput" %>
+    </div>
+    
+    <div class="actions">
+    <%= f.submit "Save", class:"btn btn-primary col-4 me-4" %>
+    <%= link_to "Cancel", casestudy_questions_path, class:"btn btn-danger col-4" %>
+    </div>
+                        
+<% end %>

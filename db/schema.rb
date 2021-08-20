@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_212343) do
+ActiveRecord::Schema.define(version: 2021_08_18_231911) do
 
   create_table "assessor_responses", force: :cascade do |t|
     t.float "rating", default: 0.0, null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2021_08_09_212343) do
     t.integer "scale", default: 6, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "contentcreator_id", null: false
+    t.index ["contentcreator_id"], name: "index_casestudies_on_contentcreator_id"
   end
 
   create_table "casestudy_users", force: :cascade do |t|
@@ -124,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_212343) do
   add_foreign_key "assessor_responses", "question_traits"
   add_foreign_key "assessor_responses", "users"
   add_foreign_key "assessor_responses", "users", column: "assessor_id"
+  add_foreign_key "casestudies", "users", column: "contentcreator_id"
   add_foreign_key "casestudy_users", "casestudies"
   add_foreign_key "casestudy_users", "users"
   add_foreign_key "casestudy_users", "users", column: "assessor_id"

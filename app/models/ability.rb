@@ -7,7 +7,7 @@ class Ability
     # Define abilities for the passed in user here. For example:4
     return unless user.present?
 
-    can :admin_dashboard, :dashboard if user.roles.exists?(name: "admin")
+    can :contentcreator_dashboard, :dashboard if user.roles.exists?(name: "contentcreator")
     can :assessor_dashboard, :dashboard if user.roles.exists?(name: "assessor")
     can :candidate_dashboard, :dashboard if user.roles.exists?(name: "candidate")
     

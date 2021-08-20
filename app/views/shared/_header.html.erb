@@ -14,25 +14,20 @@
 
           <% if current_user.roles.size > 1 %>
             <li class="nav-item"><div class="dropdown me-4">
-              <% puts "**************************** IN LI:01"%>
               <button class="btn btn-primary dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Switch Role
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <% puts "**************************** IN LI:01 UL:01"%>
                 <% if can? :candidate_dashboard, :dashboard %>
-                  <% puts "**************************** IN LI:01 UL:01 IF:01"%>
                   <li><%=link_to "Candidate", candidate_dashboard_path, class: "dropdown-item h6" %></li>
                 <% end %>
 
                 <% if can? :assessor_dashboard, :dashboard %>
-                  <% puts "**************************** IN LI:01 UL:01 IF:02"%>
                   <li><%=link_to "Assessor", assessor_dashboard_path, class: "dropdown-item h6" %></li>
                 <% end %>
 
-                <% if can? :admin_dashboard, :dashboard %>
-                  <% puts "**************************** IN LI:01 UL:01 IF:03"%>
-                  <li><%=link_to "Admin", admin_dashboard_path, class: "dropdown-item h6" %></li>
+                <% if can? :contentcreator_dashboard, :dashboard %>
+                  <li><%=link_to "Content Creator", contentcreator_dashboard_path, class: "dropdown-item h6" %></li>
                 <% end %>
                 
               </ul>
@@ -40,12 +35,10 @@
           <% end %>
 
           <li class="nav-item"><div class="dropdown me-4">
-            <% puts "**************************** IN LI:02"%>
             <button class="btn btn-primary dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               My Profile
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <% puts "**************************** IN LI:02 UL:01"%>
               <li><h4 class="dropdown-item"><%= current_user.name %></h4></li>
               <li><h6 class="dropdown-item"><%= current_user.email %></h6></li>
               <li><hr class="dropdown-divider"></li>

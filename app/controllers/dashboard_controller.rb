@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
         #authorize! :assessor_dashboard, :dashboard
     end
 
-    def admin_dashboard
-        #authorize! :admin_dashboard, :dashboard
+    def contentcreator_dashboard
+        #authorize! :contentcreator_dashboard, :dashboard
     end
 end

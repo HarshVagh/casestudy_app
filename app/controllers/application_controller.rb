@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
         end
 
         def after_sign_in_path_for(resource)
-            if resource.roles.exists?(name: "admin")
-                admin_dashboard_path
+            if resource.roles.exists?(name: "contentcreator")
+                contentcreator_dashboard_path
             elsif resource.roles.exists?(name: "assessor")
                 assessor_dashboard_path
             elsif resource.roles.exists?(name: "candidate")

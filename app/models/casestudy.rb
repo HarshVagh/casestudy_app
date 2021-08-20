@@ -6,8 +6,11 @@ class Casestudy < ApplicationRecord
 
     has_many :questions
 
+    belongs_to :contentcreator, class_name: "User"
+
     validates :duration, presence: true
     validates :scale, presence: true
     validates :scale, length: {maximum:10}
+    validates :contentcreator_id, presence: true
     
 end

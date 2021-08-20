@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :casestudy_users
   has_many :casestudies, through: :casestudy_users
   has_many :assessor_responses
+  has_many :created_casestudies, class_name: "Casestudy", foreign_key: "contentcreator_id"
 
   validates :name, presence: true
   validates :name, length: {minimum:3, maximum:30}
@@ -18,8 +19,8 @@ class User < ApplicationRecord
   validates :email, length: {maximum:50}
   validates :email, format: {with: URI::MailTo::EMAIL_REGEXP, message: "Invalid Email Address"}
 
-  validates :password, presence: true
-  validates :password, length: {minimum:6, maximum:20}
+  validates :encrypted_password, presence: true
+  #validates :encrypted_password, length: {minimum:6, maximum:20}
 
   after_create :add_new_role
 

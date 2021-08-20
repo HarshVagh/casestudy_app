@@ -1,0 +1,24 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <br><br>
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                        <h3>Add Traits to this Question</h3>
+                    </div>
+                    <div class="card-body">
+                        <div><p><%= @question.body %></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-4">
+            <%= render "form", trait: @trait%>
+        </div>
+    </div>
+</div>

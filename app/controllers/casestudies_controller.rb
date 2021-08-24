@@ -1,6 +1,19 @@
 class CasestudiesController < ApplicationController
+    load_and_authorize_resource
+    before_action :set_casestudy, only: %i[ show edit update ]
+
+    def index
+        @casestudies = Casestudy.where(contentcreator_id: current_user.id)
+    end
+    
     def new
         @casestudy = Casestudy.new
+    end
+
+    def edit
+    end
+
+    def show
     end
 
     def create
@@ -11,7 +24,16 @@ class CasestudiesController < ApplicationController
         end
     end
 
+    def update
+        if @casestudy.update(casestudy_params)
+            redirect_to casestudy_pages_path(@casestudy)
+        end
+    end
+
     private
+        def set_casestudy
+            @casestudy = Casestudy.find(params[:id])
+        end
 
         def casestudy_params
             params.require(:casestudy).permit(:name, :duration, :scale)

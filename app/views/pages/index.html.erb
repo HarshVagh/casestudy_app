@@ -1,7 +1,34 @@
 <%= render "shared/header"%>
+<div class="container">
+    <div class="row justify-content-center mt-2">
+        <div class="col">
+            
+            <table class="table table-bordered table-responsive table-hover ms-1 me-1 mt-2">
+                <thead class="table-secondary">
+                    <tr>
+                    <th>Id</th>
+                    <th>Body</th>
+                    <th colspan="3">Options</th>
+                    </tr>
+                </thead>
 
-<br>
-<div class="row justify-content-center mt-4">
-    <%= link_to "Add Page", new_casestudy_page_path, class: "btn btn-primary align-center col-3 me-4" %>
-    <%= link_to "Next", casestudy_questions_path, class: "btn btn-primary align-center col-3" %>
+                <tbody>
+                    <% @pages.each do |page| %>
+                    <tr>
+                        <td><%= page.id %></td>
+                        <td><%= page.body.size > 20 ? page.body[0..20]+"..." : page.body+"..." %></td>
+                        <td><%= link_to "Show", casestudy_page_path(@casestudy.id, page.id), class: "btn btn-success" %></td>
+                        <td><%= link_to "Edit", edit_casestudy_page_path(@casestudy.id, page), class: "btn btn-secondary" %></td>
+                        <td><%= link_to "Delete", casestudy_page_path(@casestudy.id, page.id), method: :delete, class: "btn btn-danger" %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+            <div class="row justify-content-center">
+                <%= link_to "Add Page", new_casestudy_page_path, class: "btn btn-primary align-center col-3 me-4" %>
+                <%= link_to "Next", casestudy_questions_path, class: "btn btn-primary align-center col-3" %>
+            </div>
+        </div>
+    </div>
 </div>

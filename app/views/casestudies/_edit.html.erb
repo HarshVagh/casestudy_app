@@ -1,4 +1,4 @@
-<%= form_with model: casestudy, url: { action: :create } do |f| %>
+<%= form_with model: casestudy, url: { action: :update } do |f| %>
     <br>
     <div class="form-floating mb-3">
     <%= f.text_field :name, type: "text",  class:"form-control", id:"floatingInputName", placeholder:"Enter Casestudy name" %>
@@ -19,7 +19,7 @@
 
     <div class="actions">
     <%= f.submit "Save", class:"btn btn-primary col-4 me-4" %>
-    <%= link_to "Cancel", contentcreator_dashboard_path, class:"btn btn-danger col-4" %>
+    <%= link_to "Cancel", casestudies_path, class:"btn btn-danger col-4" %>
     </div>
                         
 <% end %>

@@ -2,6 +2,16 @@
 <div class="container">
     <br>
     <div class="row justify-content-center mt-4">
-    <%= link_to "Create Casestudy", new_casestudy_path, class: "btn btn-primary align-center col-3" %>
+        <div class="col-4 justify-content-center">
+        <%= link_to "Create Casestudy", new_casestudy_path, class: "btn btn-primary align-center", style:"width: 100%" %>
+        <br><br>
+        <%= link_to "Show All Casestudies", casestudies_path, class: "btn btn-primary align-center", style:"width: 100%" %>
+        <br><br>
+        <%= link_to "Assign Roles", new_role_user_path, class: "btn btn-primary align-center", style:"width: 100%" %>
+        <br><br>
+        <%= link_to "Add Trait", new_trait_path, class: "btn btn-primary align-center", style:"width: 100%" %>
+        <br><br>
+        <%= link_to "Assign Casestudy", new_casestudy_user_path, class: "btn btn-primary align-center", style:"width: 100%" %>
+        </div>
     </div>
 </div>

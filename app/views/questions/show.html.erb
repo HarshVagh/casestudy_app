@@ -1,0 +1,28 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Question</b>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><%= @question.body %></li>
+                        <li class="list-group-item">
+                            <% @question.traits.each do |t|%>
+                                <div class="btn btn-outline-primary btn-sm disabled me-2"><%= t.name%></div>
+                            <% end %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <%= link_to "Back", casestudy_questions_path(@question.casestudy_id), class: "btn btn-primary me-4" %>
+                    <%= link_to "Edit", edit_casestudy_question_path(@question.casestudy_id, @question), class: "btn btn-secondary me-4" %>
+                    <%= link_to "Delete", casestudy_question_path(@question.casestudy_id, @question.id), method: :delete, class: "btn btn-danger" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,24 +6,17 @@ Rails.application.routes.draw do
   get "candidate_dashboard", to: "dashboard#candidate_dashboard", as: :candidate_dashboard
   get "assessor_dashboard", to: "dashboard#assessor_dashboard", as: :assessor_dashboard
   get "contentcreator_dashboard", to: "dashboard#contentcreator_dashboard", as: :contentcreator_dashboard
-  
-  # resources :casestudies do
-  #   get "index_page", to: "casestudies#index_page", as: :index_page
-  #   get "new_page", to: "casestudies#new_page", as: :new_page
-  #   post "create_page", to: "casestudies#create_page", as: :create_page
 
-  #   get "index_question", to: "casestudies#index_question", as: :index_question
-  #   get "new_question", to: "casestudies#new_question", as: :new_question
-  #   post "create_question", to: "casestudies#create_question", as: :create_question
-  #   get "index_question/:question_id/add_trait_question", to: "casestudies#add_trait_question", as: :add_trait_question
-  #   post "index_question/:question_id/create_trait_question", to: "casestudies#create_trait_question", as: :create_trait_question
-  # end
+  resources :role_users, only: [:new, :create, :destroy]
+  resources :traits, only: [:new, :create]
+  resources :casestudy_users, only: [:index, :new, :create] do
+    resources :user_responses, only: [:index, :new, :create]
+  end
 
-
-  resources :casestudies do
-    resources :pages, only: [:index, :new, :create]
-    resources :questions, only: [:index, :new, :create] do
-      resources :question_traits, only: [:new, :create]
+  resources :casestudies, only: [:index, :new, :create, :show, :edit, :update] do
+    resources :pages
+    resources :questions do
+      resources :question_traits, only: [:new, :create, :destroy]
     end
   end
 end

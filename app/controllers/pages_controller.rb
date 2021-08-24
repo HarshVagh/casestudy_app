@@ -1,16 +1,37 @@
 class PagesController < ApplicationController
-    #before_action :set_page, only %i[show edit ]
+    before_action :set_page, only: %i[ show edit update destroy ]
+
     def index
+        @casestudy = Casestudy.find(params[:casestudy_id])
+        @pages = Page.where(casestudy_id: params[:casestudy_id])
     end
 
     def new
         @page = Page.new
+    end
+
+    def show
     end
     
     def create
         @page = Page.new(page_params)
         @page.casestudy_id = params[:casestudy_id]
         if @page.save
+            redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
+        end
+    end
+
+    def edit
+    end
+
+    def update
+        if @page.update(page_params)
+            redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
+        end
+    end
+
+    def destroy
+        if @page.destroy
             redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
         end
     end

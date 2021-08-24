@@ -1,8 +1,7 @@
 <%= render "shared/header"%>
 
 <div class="container">
-    <br><br>
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center mt-2">
         <div class="col-8">
             <div class="card text-center">
                 <div class="card-header h4">
@@ -15,8 +14,28 @@
             </div>
         </div>
     </div>
+    <div class="container col-6">
+    <table class="table table-bordered table-responsive table-hover ms-1 me-1 mt-2">
+        <thead class="table-secondary">
+            <tr>
+            <th>Name</th>
+            <th>Option</th>
+            </tr>
+        </thead>
 
-    <div class="row justify-content-center mt-4">
+        <tbody>
+            <% @traits.each do |trait| %>
+            <tr>
+                <td><%= trait.name %></td>
+                <td><%= link_to "Remove", casestudy_question_question_trait_path(@question.casestudy_id, @question.id, trait.id), method: :delete, class: "btn btn-danger" %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    </div>
+
+    <div class="row justify-content-center mt-2">
         <div class="col-4">
             <%= render "form", trait: @trait%>
         </div>

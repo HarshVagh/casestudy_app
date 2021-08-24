@@ -17,7 +17,5 @@ class CasestudyUser < ApplicationRecord
     validates :status, acceptance: { accept: [ 'pending', 'ongoing', 'completed' ], message: 'enter valid status' }
 
     validates :time_elaspsed, presence: true
-    validates :started_time, presence: true
-    validates :completed_time, presence: true
 
 end

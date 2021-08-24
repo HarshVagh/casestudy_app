@@ -1,0 +1,25 @@
+<%= render "shared/header"%>
+
+<div class="container">
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Assign Casestudy</b>
+                </div>
+                <div class="card-body">
+                    <%= form_with model: @casestudy_user, url: { action: :create } do |f| %>
+                        <%= f.select :user_id, @candidates.map { |t| [ t.name, t.id ]}, {prompt: "Select Candidate"} ,class:"form-select form-select-lg col- mb-3" %>
+                        <%= f.select :assessor_id, @assessors.map { |t| [ t.name, t.id ]}, {prompt: "Select Assessor"} ,class:"form-select form-select-lg col- mb-3" %>
+                        <%= f.select :casestudy_id, @casestudies.map { |t| [ t.name, t.id ]}, {prompt: "Select Casestudy"} ,class:"form-select form-select-lg col- mb-3" %>
+                        <div class="justify-content-center">
+                            <%= f.submit "Assign", class:"btn btn-primary col-5 ms-4 me-4" %>
+                            <%= link_to "Back", contentcreator_dashboard_path, class:"btn btn-secondary col-5" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

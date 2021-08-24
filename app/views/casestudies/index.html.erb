@@ -1,0 +1,31 @@
+<%= render 'shared/header'%>
+<div class="container">
+    <%= link_to "Back", contentcreator_dashboard_path, class: "btn btn-primary mt-2 ms-1 col-2" %>
+    <table class="table table-bordered table-responsive table-hover ms-1 me-1 mt-2">
+        <thead class="table-secondary">
+            <tr>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Scale</th>
+            <th>Pages</th>
+            <th>Questions</th>
+            <th colspan="2">Options</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @casestudies.each do |casestudy| %>
+            <tr>
+                <td><%= casestudy.name %></td>
+                <td><%= casestudy.duration %></td>
+                <td><%= casestudy.scale %></td>
+                <td><%= casestudy.pages.all.count %></td>
+                <td><%= casestudy.questions.all.count %></td>
+                <td><%= link_to "Edit", edit_casestudy_path(casestudy), class: "btn btn-secondary" %></td>
+                <td><%= link_to "Show", casestudy, class: "btn btn-success" %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

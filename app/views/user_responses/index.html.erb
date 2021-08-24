@@ -1,0 +1,26 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Some instructions</b>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered text-start">
+                        <li class="list-group-item">Allow adequate time to complete this assessment in one sitting before the due date and time.</li>
+                        <li class="list-group-item">During this assessment you will be permitted to review previous questions. </li>
+                        <li class="list-group-item">You are not permitted to obtain assistance by improper means or ask for help from or give help to any other person.</li>
+                        <li class="list-group-item">You are not permitted to take screenshots, record the screen, copy and paste questions or answers or otherwise attempt to take any of the content of this exam out of the exam for any purpose.</li>
+                        <li class="list-group-item">You are not permitted to post any requests for clarification of assessment content.</li>
+                        <li class="list-group-item">Answer all questions to the best of your ability and perception of the questions’ intent.</li>
+                    </ol>
+                </div>
+                <div class="card-footer justify-content-center">
+                    <%= link_to "Start Assessment", new_casestudy_user_user_response_path(@casestudy_user), class:"btn btn-success" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 <%= form_with model: trait, url: { action: :create } do |f| %>
-    <%= f.select :trait_id, @traits.map { |t| [ t.name, t.id ]}, {prompt: "Select Trait"} ,class:"form-select form-select-lg col- mb-3" %>
+    <%= f.select :trait_id, @traits_all.map { |t| [ t.name, t.id ]}, {prompt: "Select Trait"} ,class:"form-select form-select-lg col- mb-3" %>
     <div class="justify-content-center">
         <%= f.submit "Add Trait", class:"btn btn-primary col-5 ms-4 me-4" %>
         <%= link_to "Finish", casestudy_questions_path, class:"btn btn-success col-5" %>

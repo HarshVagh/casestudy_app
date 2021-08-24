@@ -23,8 +23,6 @@ RSpec.describe "Casestudy System", type: :system do
         @role.destroy
         User.delete_all
         Role.delete_all
-        
-        
     end
 
     it "creates a new casestudy along with pages and questions" do
@@ -46,6 +44,8 @@ RSpec.describe "Casestudy System", type: :system do
         expect(casestudy.duration).to eq(30)
         expect(casestudy.scale).to eq(10)
 
+        ####################################################################################
+
         click_on "Add Page"
         expect(page).to have_current_path("/casestudies/1/pages/new")
 
@@ -65,6 +65,8 @@ RSpec.describe "Casestudy System", type: :system do
         page2 = Page.order("id").last
         expect(page2.body).to eq("More content for this new page.")
         expect(page2.casestudy_id).to eq(casestudy.id)
+
+        ####################################################################################
 
         click_on "Next"
         expect(page).to have_current_path("/casestudies/1/questions")
@@ -89,7 +91,9 @@ RSpec.describe "Casestudy System", type: :system do
         expect(question1.traits.last.name).to eq("Trait02")
 
         click_on "Finish"
-        expect(page).to have_current_path("/casestudies/1/questions")   
+        expect(page).to have_current_path("/casestudies/1/questions")
+        
+        ####################################################################################
 
         click_on "Add Question"
         expect(page).to have_current_path("/casestudies/1/questions/new")
@@ -115,7 +119,13 @@ RSpec.describe "Casestudy System", type: :system do
         click_on "Finish"
 
 
+        ####################################################################################
+
+
         expect(page).to have_current_path("/contentcreator_dashboard")
+
+        click_on "Show All Casestudies"
+        expect(page).to have_current_path("/casestudies")
     end
     
 end

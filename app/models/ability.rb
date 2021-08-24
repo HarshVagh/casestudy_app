@@ -7,9 +7,22 @@ class Ability
     # Define abilities for the passed in user here. For example:4
     return unless user.present?
 
-    can :contentcreator_dashboard, :dashboard if user.roles.exists?(name: "contentcreator")
+    if user.roles.exists?(name: "contentcreator")
+      can :contentcreator_dashboard, :dashboard 
+      can :manage, Casestudy, contentcreator_id: user.id
+      can :manage, RoleUser
+      can :manage, Trait
+      can :create, CasestudyUser
+    end
+
     can :assessor_dashboard, :dashboard if user.roles.exists?(name: "assessor")
-    can :candidate_dashboard, :dashboard if user.roles.exists?(name: "candidate")
+
+    if user.roles.exists?(name: "candidate")
+      can :candidate_dashboard, :dashboard
+      can :read, CasestudyUser
+    end
+
+    
     
     #user ||= User.new # guest user (not logged in)
     # if user.roles.first? :admin

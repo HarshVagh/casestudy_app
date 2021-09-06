@@ -1,0 +1,22 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <%= render "shared/form_errors", resource: @page %>
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Page</b>
+                </div>
+                <div class="card-body">
+                    <div><%= @page.body %></div>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <%= link_to "Back", casestudy_pages_path(@page.casestudy_id), class: "btn btn-primary me-4" %>
+                    <%= link_to "Edit", edit_casestudy_page_path(@page.casestudy_id, @page), class: "btn btn-secondary me-4" %>
+                    <%= link_to "Delete", casestudy_page_path(@page.casestudy_id, @page.id), method: :delete, class: "btn btn-danger" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

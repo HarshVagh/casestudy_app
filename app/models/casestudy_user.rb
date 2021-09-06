@@ -10,14 +10,15 @@ class CasestudyUser < ApplicationRecord
     validates :assessor_id, presence: true
 
     validates :assessor_id, numericality: { other_than: :user_id }
+
+    validates :casestudy_id, uniqueness: { scope: :user_id }
     
     validates :status, presence: true
     validates :status, length: {minimum:3, maximum:30}
     validates :status, format: {with: /\A[^0-9`!@#\$%\^&*+_=]+\z/, message: "Invalid Status string"}
-    validates :status, acceptance: { accept: [ 'pending', 'ongoing', 'completed' ], message: 'enter valid status' }
+    validates_inclusion_of :status, in: [ 'pending', 'ongoing', 'completed', 'assessed' ], message: 'enter valid status'
+
 
     validates :time_elaspsed, presence: true
-    validates :started_time, presence: true
-    validates :completed_time, presence: true
 
 end

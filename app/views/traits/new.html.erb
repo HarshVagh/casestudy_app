@@ -1,0 +1,44 @@
+<%= render "shared/header"%>
+
+<div class="container">
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>All Traits</b>
+                </div>
+                <div class="card-body">
+                    <% @traits.each do |t|%>
+                        <div class="btn btn-outline-primary btn-sm disabled me-2"><%= t.name%></div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    <%= render "shared/form_errors", resource: @trait %>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Add Trait</b>
+                </div>
+                <div class="card-body">
+                    <%= form_with model: @trait, url: { action: :create } do |f| %>
+                        <div class="form-floating mb-3">
+                            <%= f.text_field :name, type: "text",  class:"form-control", id:"floatingInputName", placeholder:"Enter Trait Name" %>
+                            <%= f.label "Enter Trait Name", for:"floatingInputName" %>
+                        </div>
+                        <div class="justify-content-center">
+                            <%= f.submit "Add Trait", class:"btn btn-primary col-5 ms-4 me-4" %>
+                            <%= link_to "Back", contentcreator_dashboard_path, class:"btn btn-secondary col-5" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

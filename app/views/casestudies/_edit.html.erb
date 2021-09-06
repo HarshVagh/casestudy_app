@@ -1,0 +1,23 @@
+<%= form_with model: casestudy, url: { action: :update } do |f| %>
+    <br>
+    <div class="form-floating mb-3">
+    <%= f.text_field :name, type: "text",  class:"form-control", id:"floatingInputName", placeholder:"Enter Casestudy name" %>
+    <%= f.label "Enter Casestudy name", for:"floatingInputName" %>
+    </div>
+    
+    <div class="form-floating mb-3">
+    <%= f.number_field :duration, in: 1..240,  class:"form-control", id:"floatingInputDuration", placeholder:"Duration In Mins" %>
+    <%= f.label "Duration (in minutes)", for:"floatingInputDuration" %>
+    </div>
+
+    <div class="form-floating mb-3">
+    <%= f.number_field :scale, in: 1..10, step: 1,  class:"form-control", id:"floatingInputScale", placeholder:"Rateing Scale (Max)" %>
+    <%= f.label "Rateing Scale (Max)", for:"floatingInputScale" %>
+    </div>
+
+    <div class="actions">
+    <%= f.submit "Save", class:"btn btn-primary col-4 me-4" %>
+    <%= link_to "Cancel", casestudies_path, class:"btn btn-danger col-4" %>
+    </div>
+                        
+<% end %>

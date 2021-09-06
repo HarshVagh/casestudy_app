@@ -1,0 +1,40 @@
+<%= render "shared/header"%>
+<div class="container">
+    <br><br><br>
+    <div class="row justify-content-center mt-4">
+        <div class="col-6 ">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Enter Details</b>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <%= form_with as: "walk_in_details", url: create_walk_in_path(@casestudy_id, @assessor_id) do |f| %>
+                          <br>
+                          <div class="form-floating mb-3">
+                            <%= f.text_field :name, type: "text",  class:"form-control", id:"floatingInputName", placeholder:"Enter your name" %>
+                            <%= f.label :name, for:"floatingInputName" %>
+                          </div>
+                          
+                          <div class="form-floating mb-3">
+                            <%= f.email_field :email, type: "email",  class:"form-control", id:"floatingInputEmail", placeholder:"name@example.com" %>
+                            <%= f.label :email, for:"floatingInputEmail" %>
+                          </div>
+
+                          <div class="form-floating mb-3">
+                            <%= f.email_field :passkey, type: "password",  class:"form-control", id:"floatingPassword", placeholder:"Password" %>
+                            <%= f.label :password, for:"floatingPassword"%>                            
+                          </div>
+
+                          <div class="actions">
+                            <%= f.submit "Next", class:"btn btn-primary col-4" %>
+                          </div>
+                                                
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

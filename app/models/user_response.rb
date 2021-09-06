@@ -8,6 +8,5 @@ class UserResponse < ApplicationRecord
     validates :user_id, presence: true
     validates :question_id, uniqueness: { scope: :casestudy_user_id }
 
-    validates :response, presence: true
     validates :response, length: {maximum:1000}
 end

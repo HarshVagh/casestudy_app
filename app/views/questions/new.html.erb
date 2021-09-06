@@ -1,0 +1,17 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <%= render "shared/form_errors", resource: @question %>
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Add Question</b>
+                </div>
+                <div class="card-body">
+                    <div><%= render "form", question: @question %></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

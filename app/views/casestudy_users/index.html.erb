@@ -1,0 +1,34 @@
+<%= render 'shared/header'%>
+<div class="container">
+    <%= link_to "Back", candidate_dashboard_path, class: "btn btn-primary mt-2 ms-1 col-2" %>
+    <table class="table table-bordered table-responsive table-hover ms-1 me-1 mt-2">
+        <thead class="table-secondary">
+            <tr>
+            <th>Sr. No.</th>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>status</th>
+            <th>Options</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @assigned_casestudies.each_with_index do |cs,i| %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= cs.casestudy.name %></td>
+                <td><%= cs.casestudy.duration %></td>
+                <td><%= cs.status %></td>
+                <% if cs.status == "pending" %>
+                    <td><%= link_to "Start", casestudy_user_instructions_path(cs), class: "btn btn-success" %></td>
+                <% elsif cs.status == "ongoing" %>
+                    <td><%= link_to "Continue", casestudy_user_instructions_path(cs), class: "btn btn-warning" %></td>
+                <% else %>
+                    <td></td>
+                <% end %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

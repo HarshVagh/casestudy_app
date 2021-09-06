@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_173228) do
+ActiveRecord::Schema.define(version: 2021_08_26_102601) do
 
   create_table "assessor_responses", force: :cascade do |t|
     t.float "rating", default: 0.0, null: false
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 2021_08_09_173228) do
     t.integer "scale", default: 6, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "contentcreator_id", null: false
+    t.string "passkey"
+    t.index ["contentcreator_id"], name: "index_casestudies_on_contentcreator_id"
   end
 
   create_table "casestudy_users", force: :cascade do |t|
@@ -114,6 +117,9 @@ ActiveRecord::Schema.define(version: 2021_08_09_173228) do
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -121,6 +127,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_173228) do
   add_foreign_key "assessor_responses", "question_traits"
   add_foreign_key "assessor_responses", "users"
   add_foreign_key "assessor_responses", "users", column: "assessor_id"
+  add_foreign_key "casestudies", "users", column: "contentcreator_id"
   add_foreign_key "casestudy_users", "casestudies"
   add_foreign_key "casestudy_users", "users"
   add_foreign_key "casestudy_users", "users", column: "assessor_id"

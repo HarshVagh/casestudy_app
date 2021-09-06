@@ -1,0 +1,92 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            
+            <h3 class="text-center"><%= @casestudy_user.casestudy.name %></h3><br>
+            
+            <hr style="height: 3px"><br>
+            
+            <h4 class="text-success">Pages</h4><hr>
+            <% @casestudy_user.casestudy.pages.each_with_index do |p, number|%>
+                <div class="card mb-2">
+                    <div class="card-header h6">
+                        <b>Page: <%= number + 1 %></b>
+                    </div>
+                    <div class="card-body">
+                        <div><%= p.body %><br>
+                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. 
+                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. 
+                        Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, 
+                        eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, 
+                        neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, 
+                        accumsan porttitor, facilisis luctus, metus
+                         </div>
+                    </div>
+                </div>
+            <% end %>
+
+            <br><hr style="height: 3px"><br>
+            
+            <h4 class="text-primary">Questions</h4>
+            <% @casestudy_user.casestudy.questions.each_with_index do |q, number|%>
+                <div class="card mb-2">
+                    <div class="card-header h6">Question: <%= number + 1 %></div>
+                    <div class="card-body">
+                        <div>
+                            <ul class="list-group">
+                                <li class="list-group-item"><%= q.body %><br>
+                                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+                                ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                                </li>
+                                <li class="list-group-item text-center text-success">
+                                    Answer
+                                </li>
+                                <li class="list-group-item">
+                                    <%= q.user_responses.find_by(casestudy_user_id: @casestudy_user.id).response %>
+                                </li>
+                            </ul>
+
+                            <table class="table table-bordered table-responsive text-center table-hover mt-2">
+                                <thead class="table-secondary">
+                                    <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Trait</th>
+                                    <th>Rating</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% q.question_traits.each_with_index do |qt, index| %>
+                                        <tr>
+                                            <td><%= index + 1 %></td>
+                                            <td> <%= qt.trait.name %> </td>
+                                            <td>
+                                                <%= form_with model: qt.assessor_responses.find_by(casestudy_user_id: @casestudy_user.id), url: { action: :update_rating }, method: :patch do |f| %>
+                                                    <%= f.number_field :question_trait_id, type:"hidden" %>
+                                                    <%= f.number_field :rating, in: 0..@casestudy_user.casestudy.scale, step: 0.1, class: " me-4 ps-2" %>
+                                                    <%= f.submit "Save", class:"btn btn-success col-4 me-4" %>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+
+            <br><hr style="height: 3px"><br>
+
+            <div class="row justify-content-center">
+                <%= link_to "Submit", submit_assessor_response_path(@casestudy_user), class: "btn btn-primary align-center col-4" %>
+            </div>
+
+            <br><br>
+
+        </div>
+    </div>
+</div>

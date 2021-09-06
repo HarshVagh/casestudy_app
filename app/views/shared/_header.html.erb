@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Jombay Assessment</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="float-right">
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <% if user_signed_in? %>
+
+          <% if current_user.roles.size >= 1 %>
+            <li class="nav-item"><div class="dropdown me-4">
+              <button class="btn btn-primary dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Switch Role
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <% if can? :candidate_dashboard, :dashboard %>
+                  <li><%=link_to "Candidate", candidate_dashboard_path, class: "dropdown-item h6" %></li>
+                <% end %>
+
+                <% if can? :assessor_dashboard, :dashboard %>
+                  <li><%=link_to "Assessor", assessor_dashboard_path, class: "dropdown-item h6" %></li>
+                <% end %>
+
+                <% if can? :contentcreator_dashboard, :dashboard %>
+                  <li><%=link_to "Content Creator", contentcreator_dashboard_path, class: "dropdown-item h6" %></li>
+                <% end %>
+                
+              </ul>
+            </div></li>
+          <% end %>
+
+          <li class="nav-item"><div class="dropdown me-4">
+            <button class="btn btn-primary dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Profile
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><h4 class="dropdown-item"><%= current_user.name %></h4></li>
+              <li><h6 class="dropdown-item"><%= current_user.email %></h6></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to 'Edit profile', edit_user_registration_path, class: 'dropdown-item' %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to "Logout", destroy_user_session_path, class: 'dropdown-item' %></li>
+            </ul>
+          </div></li>
+
+        <% else %>
+
+          <li class="nav-item"><%= link_to "Sign up", new_user_registration_path, class: 'btn btn-success me-4'  %></li>
+          <li class="nav-item"><%= link_to "Login", new_user_session_path, class: 'btn btn-primary me-4'  %></li>
+        <% end %>
+      </ul>
+    </div>
+    
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row justify-content-center mt-2">
+    <% if flash.notice %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= flash.notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <% if flash.alert %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= flash.alert %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+  </div>
+</div>

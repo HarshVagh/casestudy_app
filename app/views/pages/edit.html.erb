@@ -1,0 +1,17 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <%= render "shared/form_errors", resource: @page %>
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Edit Page</b>
+                </div>
+                <div class="card-body">
+                    <div><%= render "edit", page: @page %></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

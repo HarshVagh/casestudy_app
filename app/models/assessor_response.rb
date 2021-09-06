@@ -4,6 +4,8 @@ class AssessorResponse < ApplicationRecord
     belongs_to :user
     belongs_to :assessor, class_name: "User"
 
+    validates :casestudy_user_id, uniqueness: { scope: :question_trait_id }
+
     validates :question_trait_id, presence: true
     validates :casestudy_user_id, presence: true
     validates :user_id, presence: true

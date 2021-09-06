@@ -5,5 +5,5 @@ class Role < ApplicationRecord
     validates :name, presence: true
     validates :name, length: {minimum:3, maximum:30}
     validates :name, format: {with: /\A[^0-9`!@#\$%\^&*+_=]+\z/, message: "Invalid Name"}
-
+    validates :name, uniqueness: true
 end

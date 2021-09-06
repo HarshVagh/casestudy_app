@@ -21,12 +21,16 @@ class QuestionsController < ApplicationController
         @question.casestudy_id = params[:casestudy_id]
         if @question.save
             redirect_to new_casestudy_question_question_trait_path(casestudy_id: params[:casestudy_id], question_id: @question.id)
+        else
+            render :new, alert: "Error creating new question"
         end
     end
 
     def update
         if @question.update(question_params)
             redirect_to new_casestudy_question_question_trait_path(casestudy_id: params[:casestudy_id], question_id: @question.id)
+        else
+            render :edit, alert: "Error updating question"
         end
     end
 
@@ -34,6 +38,8 @@ class QuestionsController < ApplicationController
         if QuestionTrait.where(question_id: @question.id).destroy_all
             if @question.destroy
                 redirect_to casestudy_questions_path(casestudy_id: @question.casestudy_id)
+            else
+                render :show, alert: "Error deleting question"
             end
         end
     end

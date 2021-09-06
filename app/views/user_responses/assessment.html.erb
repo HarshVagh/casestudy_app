@@ -1,11 +1,16 @@
 <%= render "shared/header"%>
 
+
+<%= content_tag :div, id: "temp_information", data: {time: @casestudy_user.time_elaspsed, duration: @casestudy_user.casestudy.duration} do %><% end %>
 <div class="container">
     <div class="row justify-content-center mt-4">
         <div class="col-8">
+
+            <h3 class="text-center"><%= @casestudy_user.casestudy.name %></h3><br>
             
-            <h3 class="text-center"><%= @casestudy_user.casestudy.name %></h3>
-            <br><hr style="height: 3px"><br>
+            <hr style="height: 3px">
+            <h5 class="text-center" id="assessment-timer">00:00:00</h5>
+            <hr style="height: 3px"><br>
             
             <h4 class="text-success">Pages</h4><hr>
             <% @casestudy_user.casestudy.pages.each_with_index do |p, number|%>
@@ -40,7 +45,7 @@
                             ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
                             </li>
                             <li class="list-group-item">
-                                <%= form_with model: q.user_responses.find_by(casestudy_user_id: @casestudy_user.id), url: { action: :create }, method: :post do |f| %>
+                                <%= form_with model: q.user_responses.find_by(casestudy_user_id: @casestudy_user.id), url: { action: :save_response }, method: :patch do |f| %>
                                     <br>
                                     <%= f.number_field :id, type:"hidden"%>
                                     <div class="form-floating mb-3">
@@ -61,7 +66,7 @@
             <br><hr style="height: 3px"><br>
 
             <div class="row justify-content-center">
-                <%= link_to "Finish Assessment", candidate_dashboard_path, class: "btn btn-primary align-center col-4" %>
+                <%= link_to "Finish Assessment", casestudy_user_submit_assessment_path(@casestudy_user), class: "btn btn-primary align-center col-4" %>
             </div>
 
             <br><br>
@@ -69,3 +74,5 @@
         </div>
     </div>
 </div>
+
+<%= javascript_include_tag 'timer' %>

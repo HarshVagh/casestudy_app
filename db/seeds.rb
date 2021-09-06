@@ -1,2 +1,4 @@
-#roles = Role.create([ {name: 'candidate'}, {name: 'assessor'}, {name: 'contentcreator'} ])
-RoleUser.create([ {user_id: 1, role_id: 2}, {user_id: 1, role_id: 3} ])
+roles = Role.create([ {name: 'candidate'}, {name: 'assessor'}, {name: 'contentcreator'} ])
+user = User.create(name: "Harsh", email:"h@g.c", password: "12341234")
+user.roles << Role.find_by(name: "assessor")
+user.roles << Role.find_by(name: "contentcreator")

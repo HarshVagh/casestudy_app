@@ -4,19 +4,7 @@ RSpec.describe "Add Trait System" do
     
     before do
         driven_by(:rack_test)
-        Role.create(name: "candidate")
-        @role = Role.create(name: "contentcreator")
-        @user = User.create(name: "test", email: "test01@g.c", password: "11111111")
-        @user.roles << @role
-    end
-
-    after do
-        RoleUser.delete_all
-        @user.destroy
-        @role.destroy
-        User.delete_all
-        Role.delete_all
-        Trait.delete_all
+        @user = create(:contentcreator)
     end
 
     it "add new trait" do

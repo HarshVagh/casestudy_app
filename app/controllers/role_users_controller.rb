@@ -11,6 +11,8 @@ class RoleUsersController < ApplicationController
         @role_user = RoleUser.new(role_user_params)
         if @role_user.save
             redirect_to new_role_user_path
+        else
+            render :new, alert: "Error assigning new role"
         end
     end
 

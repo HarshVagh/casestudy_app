@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Trait, type: :model do
+
+    subject { build(:trait1) }
     
     describe "associations" do
         it { should have_many(:question_trait) } 
         it { should have_many(:questions).through(:question_trait) } 
     end
-
-    subject { described_class.new(name: "Trait01")}
 
     it "is valid with valid attributes" do
         expect(subject).to be_valid

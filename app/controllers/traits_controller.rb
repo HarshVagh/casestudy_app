@@ -10,6 +10,8 @@ class TraitsController < ApplicationController
         @trait = Trait.new(trait_params)
         if @trait.save
             redirect_to new_trait_path
+        else
+            render :new, alert: "Error creating new trait"
         end
     end
 

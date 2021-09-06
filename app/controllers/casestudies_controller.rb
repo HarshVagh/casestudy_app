@@ -21,12 +21,16 @@ class CasestudiesController < ApplicationController
         @casestudy.contentcreator_id = current_user.id
         if @casestudy.save
             redirect_to casestudy_pages_path(@casestudy)
+        else
+            render :new, alert: "Error creating new casestudy"
         end
     end
 
     def update
         if @casestudy.update(casestudy_params)
             redirect_to casestudy_pages_path(@casestudy)
+        else
+            render :edit, alert: "Error updating casestudy"
         end
     end
 
@@ -36,7 +40,7 @@ class CasestudiesController < ApplicationController
         end
 
         def casestudy_params
-            params.require(:casestudy).permit(:name, :duration, :scale)
+            params.require(:casestudy).permit(:name, :duration, :scale, :passkey)
         end
 
 end

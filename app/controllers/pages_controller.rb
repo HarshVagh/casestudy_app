@@ -18,6 +18,8 @@ class PagesController < ApplicationController
         @page.casestudy_id = params[:casestudy_id]
         if @page.save
             redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
+        else
+            render :new, alert: "Error creating new page"
         end
     end
 
@@ -27,12 +29,16 @@ class PagesController < ApplicationController
     def update
         if @page.update(page_params)
             redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
+        else
+            render :edit, alert: "Error updating page"
         end
     end
 
     def destroy
         if @page.destroy
             redirect_to casestudy_pages_path(casestudy_id: params[:casestudy_id])
+        else
+            render :show, alert: "Error deleting page"
         end
     end
 

@@ -5,6 +5,14 @@ class Ability
 
   def initialize(user)
     # Define abilities for the passed in user here. For example:4
+    user ||= User.new # guest user (not logged in)
+
+    can :read, :home
+    
+    if !user.id
+      can [:read, :create], :walk_in
+    end
+
     return unless user.present?
 
     if user.roles.exists?(name: "contentcreator")
@@ -15,11 +23,17 @@ class Ability
       can :create, CasestudyUser
     end
 
-    can :assessor_dashboard, :dashboard if user.roles.exists?(name: "assessor")
+    if user.roles.exists?(name: "assessor")
+      can :assessor_dashboard, :dashboard
+      can :read, AssessorResponse
+      can :assess, AssessorResponse
+      can :update_rating, AssessorResponse
+      can :submit_assessment, AssessorResponse
+    end 
 
     if user.roles.exists?(name: "candidate")
       can :candidate_dashboard, :dashboard
-      can :read, CasestudyUser
+      can :read, CasestudyUser, user: user
     end
 
     

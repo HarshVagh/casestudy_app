@@ -12,6 +12,8 @@ class QuestionTraitsController < ApplicationController
         @question_trait = @question.question_traits.create(trait_params)
         if @question_trait.save
             redirect_to new_casestudy_question_question_trait_path(casestudy_id: params[:casestudy_id], question_id: @question.id)
+        else
+            render :new, alert: "Error assigning new trait"
         end
     end
 
@@ -19,6 +21,8 @@ class QuestionTraitsController < ApplicationController
         @question_trait = QuestionTrait.where(question_id: params[:question_id], trait_id: params[:id]).first
         if @question_trait.destroy
             redirect_to new_casestudy_question_question_trait_path(casestudy_id: params[:casestudy_id], question_id: params[:question_id])
+        else
+            render :new, alert: "Error removing trait"
         end
     end
 

@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Question, type: :model do
+
+    before do
+        create(:casestudy_creator)
+    end
+
+    subject { build(:question) }
     
     describe "associations" do
         it { should belong_to(:casestudy) } 
@@ -9,26 +15,6 @@ RSpec.describe Question, type: :model do
         it { should have_many(:traits).through(:question_traits) } 
     end
 
-    subject { described_class.new(
-        body: "What is question for this casestudy?",
-        casestudy_id: 1
-    )}
-
-    before do
-        Role.create(name: "candidate")
-        @role = Role.create(name: "contentcreator")
-        @user = User.create(name: "testcreator", email: "testuser1@mail.com", password: "pass1234")
-        @user.roles << @role
-        @casestudy = Casestudy.create(name: "casestudy01", contentcreator_id: @user.id)
-    end
-
-    after do
-        RoleUser.delete_all
-        CasestudyUser.delete_all
-        Casestudy.delete_all
-        User.delete_all
-        Role.delete_all
-    end
 
     it "is valid with valid attributes" do
         expect(subject).to be_valid

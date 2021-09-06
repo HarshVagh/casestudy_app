@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_231911) do
+ActiveRecord::Schema.define(version: 2021_08_26_102601) do
 
   create_table "assessor_responses", force: :cascade do |t|
     t.float "rating", default: 0.0, null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_231911) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "contentcreator_id", null: false
+    t.string "passkey"
     t.index ["contentcreator_id"], name: "index_casestudies_on_contentcreator_id"
   end
 

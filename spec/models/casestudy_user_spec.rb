@@ -1,6 +1,13 @@
 require "rails_helper"
 
 RSpec.describe CasestudyUser, type: :model do
+    before do
+        create(:complete_casestudy)
+        create(:assessor)
+        create(:candidate)
+    end
+
+    let(:assessment) { build(:casestudy_user) }
 
     describe "associations" do
         it { should belong_to(:user) }
@@ -9,30 +16,6 @@ RSpec.describe CasestudyUser, type: :model do
         it { should have_many(:user_responses) }
         it { should have_many(:assessor_responses) }
     end
-
-    let(:assessment) { described_class.new(status: "pending", time_elaspsed: 0, casestudy_id: 1, user_id: 3, assessor_id: 2)}
-
-    before do
-        Role.create(name: "candidate")
-        @assessor_role = Role.create(name: "assessor")
-        @creator_role = Role.create(name: "contentcreator")
-        @user1 = User.create(name: "testcreator", email: "testuser1@mail.com", password: "pass1234")
-        @user2 = User.create(name: "testassessor", email: "testuser2@mail.com", password: "pass1234")
-        @user3 = User.create(name: "testcandidate", email: "testuser3@mail.com", password: "pass1234")
-        @user1.roles << @creator_role
-        @user2.roles << @assessor_role
-        @casestudy = Casestudy.create(name: "casestudy01", contentcreator_id: @user1.id)
-    end
-
-    after do
-        RoleUser.delete_all
-        CasestudyUser.delete_all
-        Casestudy.delete_all
-        User.delete_all
-        Role.delete_all
-    end
-
-
 
     it "is valid with valid attributes" do
         expect(assessment).to be_valid
@@ -76,6 +59,11 @@ RSpec.describe CasestudyUser, type: :model do
         assessment.status = "completed"
         expect(assessment).to be_valid
         assessment.status = "finished"
+        expect(assessment).to_not be_valid
+    end
+
+    it "should have be unique for (casestudy,user)" do
+        create(:casestudy_user)
         expect(assessment).to_not be_valid
     end
 end

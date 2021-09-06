@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Role, type: :model do
+
+    subject { build(:candidate_role) }
     
     describe "associations" do
         it { should have_many(:role_users) } 
         it { should have_many(:users).through(:role_users) } 
     end
-
-    subject { described_class.new(name: "candidate")}
 
     it "is valid with valid attributes" do
         expect(subject).to be_valid
@@ -28,4 +28,8 @@ RSpec.describe Role, type: :model do
         expect(subject).to_not be_valid
     end
     
+    it "should have unique name" do
+        create(:candidate_role)
+        expect(subject).to_not be_valid
+    end
 end

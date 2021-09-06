@@ -4,29 +4,12 @@ RSpec.describe "Casestudy System", type: :system do
     
     before do
         driven_by(:rack_test)
-        Role.create(name: "candidate")
-        @role = Role.create(name: "contentcreator")
-        @user = User.create(name: "test", email: "test1@g.c", password: "11111111")
-        @user.roles << @role
-        Trait.create(name: "Trait01")
-        Trait.create(name: "Trait02")
+        @user = create(:contentcreator)
+        create(:trait1)
+        create(:trait2)
     end
 
-    after do
-        RoleUser.delete_all
-        Page.delete_all
-        QuestionTrait.delete_all
-        Question.delete_all
-        Trait.delete_all
-        Casestudy.delete_all
-        @user.destroy
-        @role.destroy
-        User.delete_all
-        Role.delete_all
-    end
-
-    it "creates a new casestudy along with pages and questions" do
-
+    it "creates a new casestudy" do
         sign_in @user
         
         visit "/contentcreator_dashboard"
@@ -36,6 +19,7 @@ RSpec.describe "Casestudy System", type: :system do
         fill_in "casestudy[name]", with: "Casestudy01"
         fill_in "casestudy[duration]", with: 30
         fill_in "casestudy[scale]", with: 10
+        fill_in "casestudy[passkey]", with: "12341234"
         click_on "Save"
         expect(page).to have_current_path("/casestudies/1/pages")
         
@@ -43,8 +27,13 @@ RSpec.describe "Casestudy System", type: :system do
         expect(casestudy.name).to eq("Casestudy01")
         expect(casestudy.duration).to eq(30)
         expect(casestudy.scale).to eq(10)
+        expect(casestudy.passkey).to eq("12341234")
+    end
 
-        ####################################################################################
+    it "creates new pages for a casestudy" do
+        sign_in @user
+        casestudy = create(:casestudy)
+        visit "/casestudies/1/pages"
 
         click_on "Add Page"
         expect(page).to have_current_path("/casestudies/1/pages/new")
@@ -66,10 +55,14 @@ RSpec.describe "Casestudy System", type: :system do
         expect(page2.body).to eq("More content for this new page.")
         expect(page2.casestudy_id).to eq(casestudy.id)
 
-        ####################################################################################
-
         click_on "Next"
         expect(page).to have_current_path("/casestudies/1/questions")
+    end
+
+    it "creates questions and assigns traits" do
+        sign_in @user
+        casestudy = create(:casestudy)
+        visit "/casestudies/1/questions"
 
         click_on "Add Question"
         expect(page).to have_current_path("/casestudies/1/questions/new")
@@ -79,6 +72,7 @@ RSpec.describe "Casestudy System", type: :system do
         expect(page).to have_current_path("/casestudies/1/questions/1/question_traits/new")
         question1 = Question.order("id").last
         expect(question1.body).to eq("What is Question 01?")
+        expect(question1.casestudy_id).to eq(casestudy.id)
 
         find(:select).find(:option, "Trait01").select_option
         click_on "Add Trait"
@@ -103,6 +97,7 @@ RSpec.describe "Casestudy System", type: :system do
         expect(page).to have_current_path("/casestudies/1/questions/2/question_traits/new")
         question1 = Question.order("id").last
         expect(question1.body).to eq("What is Question 02?")
+        expect(question1.casestudy_id).to eq(casestudy.id)
 
         find(:select).find(:option, "Trait01").select_option
         click_on "Add Trait"
@@ -118,14 +113,7 @@ RSpec.describe "Casestudy System", type: :system do
         expect(page).to have_current_path("/casestudies/1/questions")
         click_on "Finish"
 
-
-        ####################################################################################
-
-
         expect(page).to have_current_path("/contentcreator_dashboard")
-
-        click_on "Show All Casestudies"
-        expect(page).to have_current_path("/casestudies")
     end
     
 end

@@ -19,7 +19,13 @@
                 <td><%= cs.casestudy.name %></td>
                 <td><%= cs.casestudy.duration %></td>
                 <td><%= cs.status %></td>
-                <td><%= link_to "Start", casestudy_user_user_responses_path(cs), class: "btn btn-success" %></td>
+                <% if cs.status == "pending" %>
+                    <td><%= link_to "Start", casestudy_user_instructions_path(cs), class: "btn btn-success" %></td>
+                <% elsif cs.status == "ongoing" %>
+                    <td><%= link_to "Continue", casestudy_user_instructions_path(cs), class: "btn btn-warning" %></td>
+                <% else %>
+                    <td></td>
+                <% end %>
             </tr>
             <% end %>
         </tbody>

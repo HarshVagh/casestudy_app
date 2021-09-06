@@ -9,6 +9,7 @@ class Casestudy < ApplicationRecord
     belongs_to :contentcreator, class_name: "User"
 
     validates :name, presence: true
+    validates :name, length: {minimum:3, maximum:30}
     validates :duration, presence: true
     validates :duration, numericality: {less_than: 250}
     validates :scale, presence: true

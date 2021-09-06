@@ -1,0 +1,22 @@
+<%= render "shared/header"%>
+
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8">
+            <div class="card text-center">
+                <div class="card-header h4">
+                    <b>Thank you for taking this assessment</b>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-numbered text-start">
+                        <li class="list-group-item">Your answers are saved successfully.</li>
+                        <li class="list-group-item">Your assessment is  submited successfully.</li>
+                    </ul>
+                </div>
+                <div class="card-footer justify-content-center">
+                    <%= link_to "Finish", candidate_dashboard_path, class:"btn btn-success" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

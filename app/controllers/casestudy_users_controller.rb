@@ -18,6 +18,8 @@ class CasestudyUsersController < ApplicationController
         @casestudy_user.time_elaspsed = 0
         if @casestudy_user.save
             redirect_to new_casestudy_user_path
+        else
+            render :new, alert: "Error assigning casestudy"
         end
     end
 
